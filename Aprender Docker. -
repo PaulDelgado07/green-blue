@@ -1,0 +1,80 @@
+Aprender Docker. - 
+----------------------------------------------------------------------------------
+docker --version = para ver la version del docker
+
+docker run hola mundo = crear una imagen 
+
+docker run -it ubuntu = Crea un contenedor nuevo basado en Ubuntu y ábreme una terminal para usarlo como si fuera una mini computadora Linux.
+
+docker images = muestra todas las imagenes que tengo descargadas en mi maquina
+
+docker ps = Muestra todos los contenedores que se estan corriendo ahora mismo. 
+
+docker ps -a = Muestra todos los contenedores asi sea que estén apagado o prendidos.
+
+docker start -ai "Name contenedor"= Sirve para iniciar un contenedor que ya existe pero está detenido
+
+-----------------------------------------------------------------------------------
+Desplegar desde VS a docker
+-----------------------------------------------------------------------------------
+En vs crear un archivo que se llame : [Dockerfile] rapidamente sale el logo de la ballena con contenedores. y dentro de ese archivo: 
+
+dockerfile:
+	FROM: python:3.11 ---- Llama a que version o que lenguaje utilizarás  
+	WORKDIR: /app     ---- crea una app por si no lo está creada
+	COPY prueba.py .   ---- lleva al archivo
+	CMD ["python", "prueba.py"] 
+
+	
+----------------------------------------------------------------------------------
+Ahora desplegar desde el cmd del "VS". -
+docker build -t hola-docker-py .
+
+docker run hola-docker-py 
+print("Hola mundo")
+
+-----------------------------------
+docker eliminar contenedor
+docker rm "ID_del_contenedor"
+por si esta corriendo..
+docker estop "ID_del_contenedor"
+-----------------------------------
+
+docker elimianr imagenes
+docker rmi "id_de_imagen"
+
+
+
+------------problemas-------------
+El blue and green son dos cosas distintas: 
+el blue que está totalmente en producción y 
+el green que está totalmente (nuevo). 
+
+
+
+-------------Switch------------------------------
+en blue and green deployement el switch es simplemente
+-Cambiar de trafico de los usuarios desde el ammbiente Blue al ambiente green.
+-no hace deploy
+-no hace build 
+-no hace test
+	Es solo mover el trafico productivo
+
+¿Cuando se hace el switch? 
+Esto se hace cuando está al 100% listo para producción
+-------------------------------------------------------
+soluciones: 
+Es problema es que cuando se usa Blue/green Prometheus y grafana se caen o se reinician porque cambian de instancia perdiendo datos y metricas.
+El problema raiz es que prometheus y grafana son stateful y blue/grenn no esta diseñado bien para este tipo de servicios. 
+	Hay que separar prometheus y grafana del blue/green deployement. Porque estos son servicios de infraestructura, no de la misma aplicacion. Deben de vivir en instancias propias con almacenamiento persistente y monitorias ambios ambientes
+
+
+
+
+
+
+
+
+
+
+
