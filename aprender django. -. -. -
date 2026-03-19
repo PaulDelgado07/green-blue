@@ -1,0 +1,104 @@
+aprender django. - 
+
+Antes que nada descargar el pip install django.
+
+-----Crear un proyecto en django donde va lo sig.--------------------------
+python -django startproyect empresas
+
+después de esto el django tiene configuracion general, donde tiene un archivo
+manage.py que ejecuta todo, tambien tiene base de datos automatica "sqlite3".
+----------------------------------------------------------------------------
+----Crearemos una app----
+python manage.py statapp tareas 
+
+Que quiere decir esto? que un proyecto puede tener muchas apps por ejemplo 
+-app usuarios 
+-app pagos 
+-app inventarios
+-app tareas
+todo esto es una aquitectura modular 
+-----------------------------------------------------------------------------
+Un error que tuve fué no registrarme en la app 
+tengo que poner:
+	settings.py ->  INSTALLED_APPS
+Si django no detecta estos modelos -> revisemos INSTALLED_APPS. 
+
+-----------------------------------------------------------------------------
+Entonces creamos nuestro primer modelos donde decía en VS: "models.py":
+from django.db from models
+	class Tareas(models.Model):
+		titulo = models.CharField(max_Length=200), 
+		descripcion = models.text()
+entonces entedimos que: 
+	-Clase Python = tabla 
+	-Atributo = Columna
+	-Django crea SQL por ti
+
+Esto es un ORM (Object Relationald Mapping).
+----------------------------------------------------------------------------- 
+ahora las migraciones.- 
+python manage.py makemigrations ---> Este crea intrucciones y ve si se registró cambios 
+
+python manage.py migrate    ---> crea la tabla 
+
+de todo esto es que ya aprendí de que un proyecto tiene: proyecto principal,
+apps, modelos, migraciones y base de datos. 
+-----------------------------------------------------------------------------
+Una vez hecho eso,  tengo que entrar al sell de django-python 
+	-python manage.py shell
+entras en python-django para poder crear, leer, actualizar y eliminar 
+
+Importamos:
+	from tareas.models import tarea
+
+crear:
+	t = Tarea.objects.create(
+		titulo = "Aprender practicante django",
+		descripcion = "prueba de practicante"
+	) 
+
+leer: 
+	Tarea.objects.all()
+
+actualizar:
+	t.titulo = "Hola mundo"
+	t.save() 
+
+eliminar:
+	t.delete()
+
+por ultimo puede mirar poniendo el mismo codigo:
+	Tarea.objects.all()
+
+-------------------------------------------------------------------------------
+APRENDER GIT. - 
+Que es lo que se hace primero? 
+---------------------------------
+git init se inicializa siempre en una carpeta
+echo print("saludo desde git") > saludos.py
+git status -- para ver como está el estado del git
+git add .  agregar ese lo que hay es ese documento 
+git commit -m "salida primero"
+git remote add origin "URL del repositorio"
+git push -u origin main 
+git remote add origin https://github.com/PaulDelgado07/Repo_funciones.git
+git branch -M main
+git push -u origin main
+---------------------------------
+git branch -- para ver cuantas ramas existe
+---------------------------------
+crear una rama 
+git checkout -b "nombre de la rama"
+git add "Nombre del archivo"
+git commit -a "asolucion del problema"
+git push origin "nombre de la rama" 
+git status -- para comprobar de que todo esta bien subido
+-------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
