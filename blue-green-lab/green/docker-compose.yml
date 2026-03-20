@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+
+  app:
+    image: python:3.11-slim
+    container_name: green_app
+    command: sh -c "pip install flask prometheus_client && python app.py"
+    volumes:
+      - ./app.py:/app.py
+    ports:
+      - "8001:8000"
+
+  node_exporter:
+    image: prom/node-exporter
+    container_name: green_node
+    ports:
+      - "9101:9100"
